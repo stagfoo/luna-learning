@@ -1,27 +1,33 @@
 
-function playerControls(player, worldObject, dt)
+function playerControls(playerObj,player, dt)
   local facingRight = 1
   local facingLeft = -1
   local isJumping = false
-  local speed = 200
-  worldObject.body:setLinearDamping(0.8)
-  -- initJumpVelocity = math.sqrt(player.gravity*player.jump_height)
-  -- initImpulse = worldObject.body:getMass()*initJumpVelocity
+  local speed = 80
 
-  if love.keyboard.isDown('right') then
-    player.direction = facingRight
-    worldObject.body:applyForce(speed, 0)
-	elseif love.keyboard.isDown('left') then
-    player.direction = facingLeft
-    worldObject.body:applyForce(-speed, 0)
-    worldObject.body:setLinearDamping(0.8)
-  end
-  if love.keyboard.isDown('space') then
-    local x,y = worldObject.body:getLinearVelocity();
-    if y > -5 and y < 5 then
-      worldObject.body:applyLinearImpulse(0, player.jump_height)
+    local dx, dy = 0, 0
+    if love.keyboard.isDown('right') then
+      dx = speed * dt
+    playerObj.direction = facingRight
+    elseif love.keyboard.isDown('left') then
+    playerObj.direction = facingRight
+    dx = -speed * dt
+
     end
-  end
+    if love.keyboard.isDown('down') then
+      dy = speed * dt
+    elseif love.keyboard.isDown('up') then
+      dy = -speed * dt
+    end
+
+    if dx ~= 0 or dy ~= 0 then
+      local cols
+      player.x, player.y, cols, cols_len = world:move(player, player.x + dx, player.y + dy)
+      for i=1, cols_len do
+        local col = cols[i]
+        consolePrint(("col.other = %s, col.type = %s, col.normal = %d,%d"):format(col.other, col.type, col.normal.x, col.normal.y))
+      end
+    end
 end
 
 -- if love.keyboard.isDown("right") then --press the right arrow key to push the ball to the right

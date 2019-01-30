@@ -1,10 +1,10 @@
 
-function newPlayer(starPos)
+function newPlayer()
 player.x = 33
 player.w = 33
 player.h = 48
+player.y = 50
 
-player.y = starPos
 player.direction = 1 -- x scale
      -- This calls the file named "player.png" and puts it in the variable called player.img.
 player.idle = love.graphics.newImage('assets/player-idle-66-48.png')

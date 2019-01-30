@@ -1,37 +1,25 @@
-local meterScale = 64
-gravity = 9.81 -- earth?
-love.physics.setMeter(meterScale)
--- x gravity | y gravity
-World = love.physics.newWorld(0, gravity*meterScale, true);
-ObjectRegistry = {}
+world = bump.newWorld(50)
+playerBox = {name="platform"}
 
-function addObject(name, x,y,w,h, bodyType, bounce)
-ObjectRegistry[name] = {}
--- Creating box
-ObjectRegistry[name].x = x
-ObjectRegistry[name].y = y
-ObjectRegistry[name].w = w
-ObjectRegistry[name].h = h
--- dynamic can move, static can't move
--- body is object for registery
-ObjectRegistry[name].body = love.physics.newBody(
-  World,
-  ObjectRegistry[name].x,
-  ObjectRegistry[name].y,
-  bodyType
-)
--- shape is collusion
-ObjectRegistry[name].shape = love.physics.newRectangleShape(
-  ObjectRegistry[name].x,
-  ObjectRegistry[name].y,
-  ObjectRegistry[name].w,
-  ObjectRegistry[name].h,
-  0)
--- phyical props, 1 is density
-ObjectRegistry[name].fixture = love.physics.newFixture(
-  ObjectRegistry[name].body,
-  ObjectRegistry[name].shape, 1 )
--- elasiticy
-ObjectRegistry[name].fixture:setRestitution(bounce)
-return ObjectRegistry[name]
+
+function drawPlatform(box, r,g,b)
+  love.graphics.setColor(r,g,b,70)
+  love.graphics.rectangle("fill", box.x, box.y, box.w, box.h)
+end
+
+local function addBlock(x,y,w,h)
+  local block = {x=x,y=y,w=w,h=h}
+  stage[#stage+1] = block
+  world:add(block, x,y,w,h)
+end
+
+function createPlatforms()
+    addBlock(0, 600,650, 50)
+    addBlock(0, 300, 250, 50)
+end
+
+function drawPlatforms()
+  for _,block in ipairs(stage) do
+    drawPlatform(block, 255,0,0)
+  end
 end
