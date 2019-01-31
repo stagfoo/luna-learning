@@ -25,7 +25,9 @@ function playerControls(playerObj,player, dt)
       player.x, player.y, cols, cols_len = world:move(player, player.x + dx, player.y + dy)
       for i=1, cols_len do
         local col = cols[i]
-        consolePrint(("col.other = %s, col.type = %s, col.normal = %d,%d"):format(col.other, col.type, col.normal.x, col.normal.y))
+        print("other:", col.other)
+        print("type", dump(col.type))
+        print("norm", dump(col.normal))
       end
     end
 end
