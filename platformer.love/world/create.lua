@@ -1,11 +1,5 @@
 world = bump.newWorld(50)
 
-function addPlayer(x,y,w,h)
-  local block = {x=x,y=y,w=w,h=h,name="playerBox"}
-  world:add(block, x,y,w,h)
-  return block
-end
-
 function drawPlatform(box, r,g,b)
   love.graphics.setColor(r,g,b,70)
   love.graphics.rectangle("fill", box.x, box.y - box.h, box.w, box.h)

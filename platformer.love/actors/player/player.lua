@@ -13,5 +13,5 @@ player.speed = 200
 player.ground = player.y     -- This makes the character land on the plaform.
 player.y_velocity = 0        -- Whenever the character hasn't jumped yet, the Y-Axis velocity is always at 0.
 player.jump_height = -250   -- Whenever the character jumps, he can reach this height.
-player.gravity = -100        -- Whenever the character falls, he will descend at this rate.
+
 end
