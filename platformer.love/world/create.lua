@@ -1,7 +1,7 @@
 world = bump.newWorld(50)
 
-function drawPlatform(box, r,g,b)
-  love.graphics.setColor(r,g,b,70)
+function drawPlatform(box)
+  love.graphics.setColor(251,180,54)
   love.graphics.rectangle("fill", box.x, box.y - box.h, box.w, box.h)
 end
 
@@ -14,12 +14,19 @@ end
 
 function createPlatforms()
     addBlock(0, 650,650, 50)
-    addBlock(0, 300, 250, 50)
+    addBlock(0, 500, 250, 50)
+    addBlock(300, 400, 200, 50)
+    addBlock(500, 300, 200, 50)
+    addBlock(0, 200, 300, 50)
+
+    addBlock(400, 250, 50, 50)
+
+
 end
 
 function drawPlatforms()
   -- check what this means
   for _,block in ipairs(stage) do
-    drawPlatform(block, 255,0,0)
+    drawPlatform(block)
   end
 end

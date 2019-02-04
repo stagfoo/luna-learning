@@ -6,7 +6,7 @@ function playerControls(playerObj, player, dt)
 local prevX, prevY = player.x, player.y
 -- Apply Friction
 player.xVelocity = player.xVelocity * (1 - math.min(dt * player.friction, 1))
-player.yVelocity = player.yVelocity * (1 - math.min(dt * player.friction, 1))
+player.yVelocity = player.yVelocity * (1 - math.min(dt * player.friction, 30))
 
 -- Apply gravity
 player.yVelocity = player.yVelocity + player.gravity * dt
@@ -23,6 +23,7 @@ end
 -- The Jump code gets a lttle bit crazy.  Bare with me.
 if love.keyboard.isDown("up", "w", "space") then
   if -player.yVelocity < player.jumpMaxSpeed and not player.hasReachedMax then
+    print(dump(player.yVelocity, player.xVelocity))
     player.yVelocity = player.yVelocity - player.jumpAcc * dt
   elseif math.abs(player.yVelocity) > player.jumpMaxSpeed then
     player.hasReachedMax = true
